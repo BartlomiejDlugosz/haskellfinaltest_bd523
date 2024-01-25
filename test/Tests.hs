@@ -22,6 +22,7 @@ tests =
   , testGroup "diffE" diffETests
   -- PART III
   , testGroup "intE" intETests
+  , testGroup "intESecret" intESecretTests
   ]
 
 addPTests :: [TestCase]
@@ -105,3 +106,17 @@ intETests = [ fmap pretty (simplifiedInt e1) -->
                 Nothing
             ]
 
+intESecretTests :: [TestCase]
+intESecretTests = [ fmap pretty (simplifiedInt e17) -->
+                      Just "[(2/125)] . ([5] . [2x^2 - 3x + 1])^(5/2)"
+                  , fmap pretty (simplifiedInt e18) -->
+                      Just "[(1/15)] . [x^3 - 3x] . ([-1] + log[x^3 - 3x])"
+                  , fmap pretty (simplifiedInt e19) -->
+                      Just "[(1/3)] . [x^3 - 3x]"
+                  , fmap pretty (simplifiedInt e20) -->
+                      Just "[(1/4)] . [x^4 - 6x^2]"
+                  , fmap pretty (simplifiedInt e21) -->
+                      Just "[(1/3)] . [x^3 - 3x] . ([-1] + log[x^3 - 3x])"
+                  , fmap pretty (simplifiedInt e22) -->
+                      Just "[(5/3)] . [x^3 - 3x] . ([-1] + log[x^3 - 3x])"
+                  ]

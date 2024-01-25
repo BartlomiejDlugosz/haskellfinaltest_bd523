@@ -1,6 +1,7 @@
 module Examples where
 
 import Types
+import Data.Ratio ((%))
 
 p1, p2, p3, p4, p5 :: Polynomial
 p1 = [(5,0)]
@@ -51,3 +52,17 @@ e15 = Mul (P [(1,2), (-1,0)]) (Log (P [(1,3), (-3,1)]))
 -- No integral to be found
 e16 :: Expr
 e16 = Mul (Log e3) (Pow e4 (1/2))
+
+-- Secret testing...
+e17, e18, e19, e20, e21, e22 :: Expr
+e17 =
+  Mul (P [(4 % 5,1),((-3) % 5,0)]) (Pow (Mul (P [(5 % 1,0)]) (P [(2 % 1,2),((-3) % 1,1),(1 % 1,0)])) (3 % 2))
+e18 =
+  Mul (P [(1 % 5,2),((-1) % 5,0)]) (Log (P [(1 % 1,3),((-3) % 1,1)]))
+-- d/dx has factor of 3 => multiply by 1/3
+e19 = P [(1,2), (-1,0)]
+e20 = P [(1,3), (-3,1)]
+e21 = Mul e19 (Log e20)
+
+-- As above but making 5/3
+e22 = Mul (Mul e1 e19) (Log e20)
